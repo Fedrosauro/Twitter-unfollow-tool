@@ -1,0 +1,26 @@
+{
+  "name": "Twitter unfollow helper",
+  "version": "1.0",
+  "description": "",
+  "permissions": ["storage", "tabs"],
+  "host_permissions": ["https://twitter.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "actions": {
+      "default_icons": {
+        "16": "",
+        "24": "",
+        "32": ""
+      },
+      "default_title": "Twitter unfollow helper",
+      "default_popup": "popup.html"
+  },
+  "manifest_version": 3
+}

@@ -1,6 +1,6 @@
 {
   "name": "Twitter unfollow helper",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "",
   "permissions": ["storage", "tabs"],
   "host_permissions": ["https://twitter.com/*"],
@@ -13,7 +13,7 @@
       "js": ["contentScript.js"]
     }
   ],
-  "actions": {
+  "action": {
       "default_icons": {
         "16": "",
         "24": "",

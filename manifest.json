@@ -22,5 +22,8 @@
       "default_title": "Twitter unfollow helper",
       "default_popup": "popup.html"
   },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js;"
+  },
   "manifest_version": 3
 }

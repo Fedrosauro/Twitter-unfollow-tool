@@ -1,12 +1,4 @@
 (() => {
-
-  /*const jQueryLib = document.createElement('script'); //inluding JQuery library
-  jQueryLib.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js';
-
-  const mainDiv = document.getElementById('react-root');
-  mainDiv.appendChild(jQueryLib);*/
-
-
   //start here
   let username;
   chrome.runtime.onMessage.addListener((obj, sender, response) => {
@@ -30,13 +22,12 @@
   const generateButtons = () => {
     console.log("generation....");
 
-    var unFollowButton = document.getElementsByClassName('css-1dbjc4n r-19u6a5r')[0];
+    const unFollowButton = document.getElementsByClassName('css-1dbjc4n r-19u6a5r')[0];
     const userRow = document.getElementsByClassName('css-1dbjc4n r-1awozwy r-18u37iz r-1wtj0ep')[0];  // 0->4 primo utente e cosi via
 
-    userRow.appendChild($('.css-1dbjc4n .r-19u6a5r').clone(true));
+    userRow.appendChild(cloneFunction(unFollowButton, true, true));
   }
 
-  //cloneFunction(unFollowButton, true, true)
 
   const cloneFunction = (eNodeOrig, bDeep, bEvents) => {
     var aInputSubElements, eNodeCopy, aNodeCopySubElements, i, j
@@ -58,6 +49,8 @@
   		// The node root
   		for (j = 0; j < allEvents.length; j++) {
   			if (eNodeOrig[allEvents[j]]) eNodeCopy[allEvents[j]] = eNodeOrig[allEvents[j]];
+        console.log(eNodeOrig + ", " + eNodeOrig[allEvents[j]] +  ", " + allEvents[j]);
+        console.log(eNodeCopy + ", " + eNodeCopy[allEvents[j]] +  ", " + allEvents[j]);
   		}
     }
 
@@ -65,6 +58,8 @@
   	for (i = 0; i < aInputSubElements.length; i++) {
   		for (j = 0; j < allEvents.length; j++) {
     		if (aInputSubElements[i][allEvents[j]]) aNodeCopySubElements[i][allEvents[j]] = aInputSubElements[i][allEvents[j]];
+        console.log(aInputSubElements + ", " + i + ", " + aInputSubElements[i][allEvents[j]] +  ", " + allEvents[j]);
+        console.log(aNodeCopySubElements + ", " + i + ", " + aNodeCopySubElements[i][allEvents[j]] +  ", " + allEvents[j]);
   			}
   		}
 

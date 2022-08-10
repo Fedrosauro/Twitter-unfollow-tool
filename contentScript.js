@@ -1,37 +1,54 @@
-(() => {
-  //start here
-  let username;
-  chrome.runtime.onMessage.addListener((obj, sender, response) => {
-    var { tab } = obj;
+console.log("Chrome extension started");
 
-    if(!username) {
-      getNameAccount(); //get the username of the user
-    }
+let nameAccTab;
+chrome.runtime.onMessage.addListener(messageReceiver);
+function messageReceiver(msg, sender, response){
+  nameAccTab = msg.name; //get the name of the acc of the tab you"re in
+}
 
-    if(tab.url.split("/")[3] === username){
-      generateButtons();
-    }
+getNameAccount(); //get the username of the user
+if(msg.tabSent.url.split("/")[3] === username){
+  generateButtons();
+}
 
-  });
+function getNameAccount(){
+  const username = document.querySelector("a[data-testid=AppTabBar_Profile_Link]").getAttribute("href").substring(1);
+  console.log("The username is : " + username); //testing thing
+}
 
-  const getNameAccount = () => {
-    username = document.querySelector('a[data-testid=AppTabBar_Profile_Link]').getAttribute('href').substring(1);
-    console.log(username); //testing thing
+const generateButtons = () => {
+  console.log("generation....");
+
+  for(let i = 0; i < 2; i++){
+    let userRow = document.getElementsByClassName("css-1dbjc4n r-1adg3ll r-1ny4l3l")[i];
+
+    let element = document.createElement("p");
+    element.innerHTML = "This is a paragraph";
+    element.style.color = "white";
+
+    userRow.appendChild(element);
   }
+}
 
-  const generateButtons = () => {
-    console.log("generation....");
 
-    const unFollowButton = document.getElementsByClassName('css-1dbjc4n r-19u6a5r')[0];
-    const copy = unFollowButton.cloneNode(true); //fake copy of the button
-    const userRow = document.getElementsByClassName('css-1dbjc4n r-1awozwy r-18u37iz r-1wtj0ep')[0];  // 0->4 primo utente e cosi via
 
-    copy.firstChild.style.borderColor = 'magenta';
-    copy.firstChild.firstChild.style.color = 'magenta';
-    copy.firstChild.firstChild.firstChild.firstChild.innerHTML = 'can Unfollow';
+/*
 
-    userRow.appendChild(copy);
+const unFollowButton = document.getElementsByClassName("css-1dbjc4n r-19u6a5r")[i]; //0->17
+const copy = unFollowButton.cloneNode(true); //fake copy of the button
+copy.firstChild.style.backgroundColor = null;
+copy.firstChild.style.borderColor = "#EA526F";
+copy.firstChild.firstChild.style.color = "#EA526F";
+copy.firstChild.firstChild.firstChild.firstChild.innerHTML = "Unfollow";
 
-  }
-
-})();
+copy.addEventListener("mouseover", function (){
+copy.firstChild.style.backgroundColor = "#F9F9F9";
+copy.firstChild.style.borderColor = "#F9F9F9";
+copy.firstChild.firstChild.style.color = "#484A47";
+});
+copy.addEventListener("mouseout", function (){
+copy.firstChild.style.backgroundColor = null;
+copy.firstChild.style.borderColor = "#EA526F";
+copy.firstChild.firstChild.style.color = "#EA526F";
+});
+*/

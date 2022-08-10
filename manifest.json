@@ -14,13 +14,13 @@
     }
   ],
   "action": {
-      "default_icons": {
-        "16": "",
-        "24": "",
-        "32": ""
-      },
-      "default_title": "Twitter unfollow helper",
-      "default_popup": "popup.html"
+    "default_icons": {
+      "16": "",
+      "24": "",
+      "32": ""
+    },
+    "default_title": "Twitter unfollow helper",
+    "default_popup": "popup.html"
   },
   "manifest_version": 3
 }

@@ -1,18 +1,38 @@
 console.log("Chrome extension started");
 
-let nameAccTab;
+let nameAccTab, username, element, id;
+
+id = setInterval(getName, 100);
+
+function getName(){
+  element = document.querySelector("a[data-testid=AppTabBar_Profile_Link]");
+  console.log(element.getAttribute("href").substring(1));
+  if(element){clearInterval(id);}
+}
+
+//const myTimeOut = setTimeout(getName, 100);
+
+/*function getName(){
+  element = document.querySelector("a[data-testid=AppTabBar_Profile_Link]");
+  console.log(element.getAttribute("href").substring(1));
+}*/
+
 chrome.runtime.onMessage.addListener(messageReceiver);
+
 function messageReceiver(msg, sender, response){
   nameAccTab = msg.name; //get the name of the acc of the tab you"re in
+  console.log("I've received a message!")
+  console.log(element.getAttribute("href").substring(1));
 }
 
-getNameAccount(); //get the username of the user
-if(msg.tabSent.url.split("/")[3] === username){
-  generateButtons();
+/*setNameAccount(); //get the username of the user
+
+/*if(nameAccTab === username){
+generateButtons();
 }
 
-function getNameAccount(){
-  const username = document.querySelector("a[data-testid=AppTabBar_Profile_Link]").getAttribute("href").substring(1);
+function setNameAccount(){
+  username = document.querySelector("a[data-testid=AppTabBar_Profile_Link]").getAttribute("href").substring(1);
   console.log("The username is : " + username); //testing thing
 }
 
@@ -28,7 +48,7 @@ const generateButtons = () => {
 
     userRow.appendChild(element);
   }
-}
+}*/
 
 
 

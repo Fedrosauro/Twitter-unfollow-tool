@@ -1,74 +1,47 @@
 console.log("Chrome extension started");
 
-let nameAccTab, username, element, id;
-
-id = setInterval(getName, 100);
-
-function getName(){
-  element = document.querySelector("a[data-testid=AppTabBar_Profile_Link]");
-  console.log(element.getAttribute("href").substring(1));
-  if(element){clearInterval(id);}
-}
-
-//const myTimeOut = setTimeout(getName, 100);
-
-/*function getName(){
-  element = document.querySelector("a[data-testid=AppTabBar_Profile_Link]");
-  console.log(element.getAttribute("href").substring(1));
-}*/
-
+let nameAccTab;
 chrome.runtime.onMessage.addListener(messageReceiver);
 
 function messageReceiver(msg, sender, response){
   nameAccTab = msg.name; //get the name of the acc of the tab you"re in
   console.log("I've received a message!")
-  console.log(element.getAttribute("href").substring(1));
 }
 
-/*setNameAccount(); //get the username of the user
+let element, id, targetNode, config, observer;
+let finished = false;
 
-/*if(nameAccTab === username){
-generateButtons();
-}
+id = setInterval(getThings, 100);
 
-function setNameAccount(){
-  username = document.querySelector("a[data-testid=AppTabBar_Profile_Link]").getAttribute("href").substring(1);
-  console.log("The username is : " + username); //testing thing
-}
+function getThings(){
+  element = document.querySelector("a[data-testid='AppTabBar_Profile_Link']"); //element for the profile name
+  targetNode = document.querySelector("div[aria-label='Timeline: Following']"); //targetNode to check for DOM changes
 
-const generateButtons = () => {
-  console.log("generation....");
-
-  for(let i = 0; i < 2; i++){
-    let userRow = document.getElementsByClassName("css-1dbjc4n r-1adg3ll r-1ny4l3l")[i];
-
-    let element = document.createElement("p");
-    element.innerHTML = "This is a paragraph";
-    element.style.color = "white";
-
-    userRow.appendChild(element);
+  console.log((element && targetNode) ? "I got the elements" : "Some elements are still unknown" );
+  if(element && targetNode){
+    clearInterval(id);
+    console.log("Element username = " + element.getAttribute("href").substring(1));
+    console.log("Element targetNode = " + targetNode);
+    observationStart();
   }
-}*/
+}
 
+function observationStart(){
+  config = {
+    childList: true, //mutations I want to observe
+    attributes: true,
+    subtree: true
+  }
 
+  observer = new MutationObserver(observerFunc); // Create an observer instance linked to the callback function
+  observer.observe(targetNode.firstChild, config); // Start observing the target node for configured mutations
+  console.log("Observation started");
 
-/*
-
-const unFollowButton = document.getElementsByClassName("css-1dbjc4n r-19u6a5r")[i]; //0->17
-const copy = unFollowButton.cloneNode(true); //fake copy of the button
-copy.firstChild.style.backgroundColor = null;
-copy.firstChild.style.borderColor = "#EA526F";
-copy.firstChild.firstChild.style.color = "#EA526F";
-copy.firstChild.firstChild.firstChild.firstChild.innerHTML = "Unfollow";
-
-copy.addEventListener("mouseover", function (){
-copy.firstChild.style.backgroundColor = "#F9F9F9";
-copy.firstChild.style.borderColor = "#F9F9F9";
-copy.firstChild.firstChild.style.color = "#484A47";
-});
-copy.addEventListener("mouseout", function (){
-copy.firstChild.style.backgroundColor = null;
-copy.firstChild.style.borderColor = "#EA526F";
-copy.firstChild.firstChild.style.color = "#EA526F";
-});
-*/
+  function observerFunc(mutationList, observer){
+    for (const mutation of mutationList) {
+      if (mutation.type === "childList" || mutation.type === "attributes" || mutation.type === "subtree") {
+        console.log("A Node has been added or removed or modified");
+      }
+    }
+  }
+}

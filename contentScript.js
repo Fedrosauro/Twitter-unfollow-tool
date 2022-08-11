@@ -29,8 +29,7 @@ function getThings(){
 function observationStart(){
   config = {
     childList: true, //mutations I want to observe
-    attributes: true,
-    subtree: true
+    attributes: true
   }
 
   observer = new MutationObserver(observerFunc); // Create an observer instance linked to the callback function
@@ -39,7 +38,7 @@ function observationStart(){
 
   function observerFunc(mutationList, observer){
     for (const mutation of mutationList) {
-      if (mutation.type === "childList" || mutation.type === "attributes" || mutation.type === "subtree") {
+      if (mutation.type === "childList" || mutation.type === "attributes") {
         console.log("A Node has been added or removed or modified");
       }
     }

@@ -9,7 +9,7 @@ function messageReceiver(msg, sender, response){
 }
 
 let element, id, targetNode, config, observer;
-let finished = false;
+let myArray = new Array(32);
 
 id = setInterval(getThings, 100);
 
@@ -28,8 +28,7 @@ function getThings(){
 
 function observationStart(){
   config = {
-    childList: true, //mutations I want to observe
-    attributes: true
+    childList: true //mutations I want to observe
   }
 
   observer = new MutationObserver(observerFunc); // Create an observer instance linked to the callback function
@@ -38,8 +37,16 @@ function observationStart(){
 
   function observerFunc(mutationList, observer){
     for (const mutation of mutationList) {
-      if (mutation.type === "childList" || mutation.type === "attributes") {
-        console.log("A Node has been added or removed or modified");
+      if (mutation.type === "childList") {
+        console.clear();
+        for(var i = 0; i < myArray.length; i++){
+          myArray[i] = undefined;
+        }
+        var children = targetNode.firstChild.children;
+        for(var i = 0; i < children.length; i++){
+          myArray[i] = children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.firstChild.firstChild.children[1].firstChild.firstChild.href.substring(20);
+        }
+        console.log(...myArray);
       }
     }
   }

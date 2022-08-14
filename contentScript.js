@@ -45,6 +45,22 @@ function observationStart(){
         var children = targetNode.firstChild.children;
         for(var i = 0; i < children.length; i++){
           myArray[i] = children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.firstChild.firstChild.children[1].firstChild.firstChild.href.substring(20);
+          if(children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children.length < 4){
+            let newElement = document.createElement("p");
+            newElement.innerHTML = "Unfollow: " + myArray[i];
+            newElement.style.color = "white";
+            newElement.style.border = "1px solid";
+            newElement.style.borderColor = "rgb(83, 100, 113)";
+            newElement.style.borderRadius = "9999px";
+            newElement.style.padding = "7px";
+            newElement.style.paddingRight = "16px";
+            newElement.style.paddingLeft = "16px";
+            newElement.style.fontWeight = "bold";
+            newElement.style.fontFamily = "TwitterChirp";
+            newElement.style.fontSize = "14px";
+            let elementToAppend = children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children[1];
+            elementToAppend.parentNode.insertBefore(newElement, elementToAppend.nextSibling);
+          }
         }
         console.log(...myArray);
       }

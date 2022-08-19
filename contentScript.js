@@ -63,10 +63,10 @@ function buttonsGeneration(){
     myArray[i] = children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.firstChild.firstChild.children[1].firstChild.firstChild.href.substring(20);
     if(children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children.length < 4){
       objToAdd = document.createElement("p");
+      let elementToAppend = children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children[1];
+      elementToAppend.parentNode.insertBefore(objToAdd, elementToAppend.nextSibling);
       objToAdd.innerHTML = "Unfollow";
-      objToAdd.style.color = "white";
       objToAdd.style.border = "1px solid";
-      objToAdd.style.borderColor = "rgb(83, 100, 113)";
       objToAdd.style.borderRadius = "9999px";
       objToAdd.style.padding = "7px";
       objToAdd.style.paddingRight = "16px";
@@ -74,10 +74,25 @@ function buttonsGeneration(){
       objToAdd.style.fontWeight = "bold";
       objToAdd.style.fontFamily = "TwitterChirp";
       objToAdd.style.fontSize = "14px";
-      let elementToAppend = children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children[1];
-      elementToAppend.parentNode.insertBefore(objToAdd, elementToAppend.nextSibling);
+      objToAdd.style.setProperty("color", "white");
+      objToAdd.style.borderColor = "rgb(83, 100, 113)";
+      objToAdd.style.backgroundColor = "green";
+      objToAdd.addEventListener("mouseover", mouseOver);
+      objToAdd.addEventListener("mouseout", mouseOut);
       console.log("Element added");
     }
   }
   console.log(...myArray);
+}
+
+function mouseOver(){
+  this.style.setProperty("color", "red");
+  this.style.borderColor = "red";
+  this.style.backgroundColor = "white";
+}
+
+function mouseOut(){
+  this.style.setProperty("color", "white");
+  this.style.borderColor = "rgb(83, 100, 113)";
+  this.style.backgroundColor = "green";
 }

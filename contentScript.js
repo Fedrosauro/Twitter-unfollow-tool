@@ -13,7 +13,7 @@ function tabUpdated(msg, sender, response){
   id = setInterval(getThings, 100);
 }
 
-if(startTab){
+if(startTab && window.location.href.includes("following")){ //when the tab is first opened
   id = setInterval(getThings, 100);
   console.log("Start tab happened");
   startTab = false;
@@ -79,6 +79,11 @@ function buttonsGeneration(){
       objToAdd.style.backgroundColor = "green";
       objToAdd.addEventListener("mouseover", mouseOver);
       objToAdd.addEventListener("mouseout", mouseOut);
+
+      let distance = getDistanceBetweenElements(elementToAppend, objToAdd);
+
+      objToAdd.style.marginLeft = distance*2 + 50 + "px";
+
       console.log("Element added");
     }
   }
@@ -95,4 +100,19 @@ function mouseOut(){
   this.style.setProperty("color", "white");
   this.style.borderColor = "rgb(83, 100, 113)";
   this.style.backgroundColor = "green";
+}
+
+function getPosRightX1LeftX2(element) {
+  let {top, left, width, height} = element.getBoundingClientRect();
+  return {
+    x1: left + width,
+    x2: left
+  };
+}
+
+function getDistanceBetweenElements(a, b) {
+  let aPosition = getPosRightX1LeftX2(a);
+  let bPosition = getPosRightX1LeftX2(b);
+
+  return aPosition.x1 - bPosition.x2;
 }

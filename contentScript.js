@@ -1,5 +1,11 @@
 console.log("Chrome extension started");
 
+var style = document.createElement('link');
+style.rel = 'stylesheet';
+style.type = 'text/css';
+style.href = chrome.extension.getURL('style.css');
+(document.head||document.documentElement).appendChild(style);
+
 let nameAccTab, element, objToAdd, id, targetNode, config1, observer1, startTab, firstRefresh, lastURL;
 let myArray = new Array(32);
 
@@ -62,7 +68,7 @@ function buttonsGeneration(){
   for(var i = 0; i < children.length; i++){
     myArray[i] = children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.firstChild.firstChild.children[1].firstChild.firstChild.href.substring(20);
     if(children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children.length < 4){
-      objToAdd = document.createElement("p");
+      objToAdd = document.createElement("button");
       let elementToAppend = children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children[1];
       elementToAppend.parentNode.insertBefore(objToAdd, elementToAppend.nextSibling);
       objToAdd.innerHTML = "Unfollow";
@@ -82,7 +88,9 @@ function buttonsGeneration(){
 
       let distance = getDistanceBetweenElements(elementToAppend, objToAdd);
 
-      objToAdd.style.marginLeft = distance*2 + 50 + "px";
+      objToAdd.style.marginLeft = distance*2 + 60 + "px";
+
+      objToAdd.classList.add("test");
 
       console.log("Element added");
     }

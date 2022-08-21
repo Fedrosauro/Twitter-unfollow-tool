@@ -7,12 +7,14 @@
   "background": {
     "service_worker": "background.js"
   },
+
   "content_scripts": [
     {
       "matches": ["https://twitter.com/*"],
       "js": ["contentScript.js"]
     }
   ],
+
   "action": {
     "default_icons": {
       "16": "",
@@ -22,5 +24,13 @@
     "default_title": "Twitter unfollow helper",
     "default_popup": "popup.html"
   },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["style.css"],
+      "matches": ["https://twitter.com/*/following"]
+    }
+  ],
+
   "manifest_version": 3
 }

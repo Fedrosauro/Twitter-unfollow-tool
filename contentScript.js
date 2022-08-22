@@ -1,9 +1,9 @@
 console.log("Chrome extension started");
 
-var style = document.createElement('link');
-style.rel = 'stylesheet';
-style.type = 'text/css';
-style.href = chrome.extension.getURL('style.css');
+var style = document.createElement("link");
+style.rel = "stylesheet";
+style.type = "text/css";
+style.href = chrome.runtime.getURL("style.css");
 (document.head||document.documentElement).appendChild(style);
 
 let nameAccTab, element, objToAdd, id, targetNode, config1, observer1, startTab, firstRefresh, lastURL;
@@ -90,7 +90,7 @@ function buttonsGeneration(){
 
       objToAdd.style.marginLeft = distance*2 + 60 + "px";
 
-      objToAdd.classList.add("test");
+      objToAdd.classList.add("myButton");
 
       console.log("Element added");
     }

@@ -1,3 +1,7 @@
-.test {
-    color: "yellow" !important;
+.myButton{
+  color: yellow !important;
+}
+
+.myButton:hover{
+  color: white !important;
 }

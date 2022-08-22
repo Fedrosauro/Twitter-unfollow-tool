@@ -71,43 +71,19 @@ function buttonsGeneration(){
       objToAdd = document.createElement("button");
       let elementToAppend = children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children[1];
       elementToAppend.parentNode.insertBefore(objToAdd, elementToAppend.nextSibling);
-      objToAdd.innerHTML = "Unfollow";
-      objToAdd.style.border = "1px solid";
-      objToAdd.style.borderRadius = "9999px";
-      objToAdd.style.padding = "7px";
-      objToAdd.style.paddingRight = "16px";
-      objToAdd.style.paddingLeft = "16px";
-      objToAdd.style.fontWeight = "bold";
-      objToAdd.style.fontFamily = "TwitterChirp";
-      objToAdd.style.fontSize = "14px";
-      objToAdd.style.setProperty("color", "white");
-      objToAdd.style.borderColor = "rgb(83, 100, 113)";
-      objToAdd.style.backgroundColor = "green";
-      objToAdd.addEventListener("mouseover", mouseOver);
-      objToAdd.addEventListener("mouseout", mouseOut);
-
       let distance = getDistanceBetweenElements(elementToAppend, objToAdd);
 
-      objToAdd.style.marginLeft = distance*2 + 60 + "px";
+      objToAdd.innerHTML = "Unfollow";
 
-      objToAdd.classList.add("myButton");
+      objToAdd.style.marginLeft = distance*2 + 130 + "px";
+
+      objToAdd.classList.add("btn");
+
 
       console.log("Element added");
     }
   }
   console.log(...myArray);
-}
-
-function mouseOver(){
-  this.style.setProperty("color", "red");
-  this.style.borderColor = "red";
-  this.style.backgroundColor = "white";
-}
-
-function mouseOut(){
-  this.style.setProperty("color", "white");
-  this.style.borderColor = "rgb(83, 100, 113)";
-  this.style.backgroundColor = "green";
 }
 
 function getPosRightX1LeftX2(element) {

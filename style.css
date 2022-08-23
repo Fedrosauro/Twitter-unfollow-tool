@@ -71,11 +71,12 @@
   radial-gradient(circle, #F61067, 20%, transparent 20%),
   radial-gradient(circle, #F61067, 20%, transparent 20%),
   radial-gradient(circle, #F61067, 20%, transparent 20%);
-  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+  background-size: 25% 25%, 30% 30%, 28% 28%, 30% 30%, 25% 25%, 20% 20%, 30% 30%;
 }
 
 .btn:active{
-  transform: scale(0.8);
+  transform: scale(0.7);
+  transition: 0.1s;
 }
 
 .btn.animate:before{

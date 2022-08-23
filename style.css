@@ -10,14 +10,14 @@
   font-size: 14px;
   color: black;
   background-color: white;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
 .btn:hover{
   background-color: #F61067;
   border: 0.1px solid #F61067;
   color: white;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
 .btn:before{
@@ -28,7 +28,7 @@
   height: 100%;
   left: -20%;
   z-index: -1000;
-  transition: all ease-in-out 0.3s;
+  transition: all ease-in-out 0.2s;
   background-repeat: no-repeat;
 }
 
@@ -40,7 +40,7 @@
   height: 100%;
   left: -20%;
   z-index: -1000;
-  transition: all ease-in-out 0.3s;
+  transition: all ease-in-out 0.2s;
   background-repeat: no-repeat;
 }
 
@@ -48,15 +48,15 @@
   display: none;
   top: -75%;
   background-image:
-  radial-gradient(circle, #F61067; 20%, transparent 20%),
-  radial-gradient(circle,  transparent 20%, #F61067; 20%, transparent 30%),
-  radial-gradient(circle, #F61067; 20%, transparent 20%),
-  radial-gradient(circle, #F61067; 20%, transparent 20%),
-  radial-gradient(circle,  transparent 10%, #F61067; 15%, transparent 20%),
-  radial-gradient(circle, #F61067; 20%, transparent 20%),
-  radial-gradient(circle, #F61067; 20%, transparent 20%),
-  radial-gradient(circle, #F61067; 20%, transparent 20%),
-  radial-gradient(circle, #F61067; 20%, transparent 20%);
+  radial-gradient(circle, #F61067, 20%, transparent 20%),
+  radial-gradient(circle,  transparent 20%, #F61067, 20%, transparent 30%),
+  radial-gradient(circle, #F61067, 20%, transparent 20%),
+  radial-gradient(circle, #F61067, 20%, transparent 20%),
+  radial-gradient(circle,  transparent 10%, #F61067, 15%, transparent 20%),
+  radial-gradient(circle, #F61067, 20%, transparent 20%),
+  radial-gradient(circle, #F61067, 20%, transparent 20%),
+  radial-gradient(circle, #F61067, 20%, transparent 20%),
+  radial-gradient(circle, #F61067, 20%, transparent 20%);
   background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
 }
 
@@ -64,13 +64,13 @@
   display: none;
   bottom: -75%;
   background-image:
-  radial-gradient(circle, #F61067; 20%, transparent 20%),
-  radial-gradient(circle, #F61067; 20%, transparent 20%),
-  radial-gradient(circle,  transparent 10%, #F61067; 15%, transparent 20%),
-  radial-gradient(circle, #F61067; 20%, transparent 20%),
-  radial-gradient(circle, #F61067; 20%, transparent 20%),
-  radial-gradient(circle, #F61067; 20%, transparent 20%),
-  radial-gradient(circle, #F61067; 20%, transparent 20%);
+  radial-gradient(circle, #F61067, 20%, transparent 20%),
+  radial-gradient(circle, #F61067, 20%, transparent 20%),
+  radial-gradient(circle,  transparent 10%, #F61067, 15%, transparent 20%),
+  radial-gradient(circle, #F61067, 20%, transparent 20%),
+  radial-gradient(circle, #F61067, 20%, transparent 20%),
+  radial-gradient(circle, #F61067, 20%, transparent 20%),
+  radial-gradient(circle, #F61067, 20%, transparent 20%);
   background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
 }
 
@@ -78,11 +78,11 @@
   transform: scale(0.8);
 }
 
-.animate:before{
+.btn.animate:before{
   display: block;
   animation: topBubbles ease-in-out 0.75s forwards;
 }
-.animate:after{
+.btn.animate:after{
   display: block;
   animation: bottomBubbles ease-in-out 0.75s forwards;
 }

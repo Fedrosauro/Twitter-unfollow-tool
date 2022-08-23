@@ -88,7 +88,7 @@ function buttonsGeneration(){
         e.target.classList.add("animate");
         setTimeout(function(){
           e.target.classList.remove("animate");
-        },700);
+        },500);
       };
 
       objToAdd.addEventListener("click", animateButton, false);

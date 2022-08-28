@@ -66,34 +66,18 @@ function buttonsGeneration(){
   var children = targetNode.firstChild.children;
   console.log(children);
   for(var i = 0; i < children.length; i++){
-    myArray[i] = children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.firstChild.firstChild.children[1].firstChild.firstChild.href.substring(20);
-    if(children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children.length < 4){
+    myArray[i] = children[i].firstChild.firstChild.firstChild ? children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.firstChild.firstChild.children[1].firstChild.firstChild.href.substring(20) : undefined;
+    if(children[i].firstChild.firstChild.firstChild && children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children.length < 4){
       objToAdd = document.createElement("button");
       let elementToAppend = children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children[1];
       elementToAppend.parentNode.insertBefore(objToAdd, elementToAppend.nextSibling);
       let distance = getDistanceBetweenElements(elementToAppend, objToAdd);
-
       objToAdd.innerHTML = "Unfollow";
-
       objToAdd.style.marginLeft = distance*2 + 130 + "px";
-
       objToAdd.classList.add("btn");
-
-      var animateButton = function(e) {
-
-        e.preventDefault;
-        //reset animation
-        e.target.classList.remove("animate");
-
-        e.target.classList.add("animate");
-        setTimeout(function(){
-          e.target.classList.remove("animate");
-        },500);
-      };
-
-      objToAdd.addEventListener("click", animateButton, false);
-
-
+      objToAdd.setAttribute("name", myArray[i]);
+      objToAdd.addEventListener("click", animateButton);
+      objToAdd.addEventListener("click", function(){ clickAction(children) });
       console.log("Element added");
     }
   }
@@ -113,4 +97,20 @@ function getDistanceBetweenElements(a, b) {
   let bPosition = getPosRightX1LeftX2(b);
 
   return aPosition.x1 - bPosition.x2;
+}
+
+function animateButton(e) {
+  e.preventDefault;
+  //reset animation
+  e.target.classList.remove("animate");
+  e.target.classList.add("animate");
+  setTimeout(function(){
+    e.target.classList.remove("animate");
+  },500);
+}
+
+function clickAction(element){
+  //element.firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children[1].firstChild.click();
+  console.log(element);
+
 }

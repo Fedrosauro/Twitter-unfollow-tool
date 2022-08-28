@@ -20,8 +20,8 @@ function tabUpdated(msg, sender, response){
 }
 
 if(startTab && window.location.href.includes("following")){ //when the tab is first opened
-  id = setInterval(getThings, 100);
   console.log("Start tab happened");
+  id = setInterval(getThings, 100);
   startTab = false;
 }
 

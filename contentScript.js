@@ -1,5 +1,6 @@
 console.log("Chrome extension started");
 
+//including css sh1t for the button and pop-up
 var style = document.createElement("link");
 style.rel = "stylesheet";
 style.type = "text/css";
@@ -9,31 +10,42 @@ style.href = chrome.runtime.getURL("style.css");
 let element, objToAdd, id, targetNode, config1, observer1, startTab, firstRefresh, lastURL;
 let myArray = new Array(32);
 
-startTab = true;
+startTab = false; //used only if the first url is https...../*name*/following
 
 chrome.runtime.onMessage.addListener(tabUpdated);
 
 function tabUpdated(msg, sender, response){ //when tab is updated
+  if(id) clearInterval(id);
   console.log("I've received a message!");
-  id = setInterval(getThings, 100);
+  if(window.location.href.includes("following")){
+    id = setInterval(getThings, 100);
+  }
 }
 
-if(startTab && window.location.href.includes("following")){ //when the following tab is first opened
+if(!startTab && window.location.href.includes("following")){ //when the following tab is first opened
+  startTab = true;
   console.log("Start tab happened");
   id = setInterval(getThings, 100);
-  startTab = false;
 }
 
 function getThings(){
   element = document.querySelector("a[data-testid='AppTabBar_Profile_Link']"); //element for the profile name
   targetNode = document.querySelector("div[aria-label='Timeline: Following']"); //targetNode to check for DOM changes
 
-  console.log((element && targetNode) ? "I got the elements" : "Some elements are still unknown" );
-  if(element && targetNode && element.getAttribute("href").substring(1) === window.location.href.split("/")[3]){
-    clearInterval(id);
-    console.log("Element username = " + element.getAttribute("href").substring(1));
-    console.log("Element targetNode = " + targetNode);
-    observationStart();
+  if(element && element.getAttribute("href").substring(1) === window.location.href.split("/")[3]){
+    if(targetNode){
+      clearInterval(id);
+      console.log("Element username = " + element.getAttribute("href").substring(1));
+      console.log("Element targetNode = " + targetNode);
+      observationStart();
+    }
+  } else{
+    if(startTab){
+      console.log("Some elements are still unknown");
+    } else{
+      clearInterval(id);
+      console.log("Some elements are still unknown");
+    }
   }
 }
 
@@ -65,8 +77,8 @@ function buttonsGeneration(){
   var children = targetNode.firstChild.children;
   console.log(children);
   for(var i = 0; i < children.length; i++){
-    myArray[i] = children[i].firstChild.firstChild.firstChild ? children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.firstChild.firstChild.children[1].firstChild.firstChild.href.substring(20) : undefined;
-    if(children[i].firstChild.firstChild.firstChild && children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children.length < 4){
+    myArray[i] = children[i].firstChild.firstChild.firstChild.children ? children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.firstChild.firstChild.children[1].firstChild.firstChild.href.substring(20) : undefined;
+    if(children[i].firstChild.firstChild.firstChild.children && children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children.length < 4){
       objToAdd = document.createElement("button");
       let elementToAppend = children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children[1];
       elementToAppend.parentNode.insertBefore(objToAdd, elementToAppend.nextSibling);

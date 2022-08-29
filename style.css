@@ -75,7 +75,7 @@
 }
 
 .btn:active{
-  transform: scale(0.7);
+  transform: scale(0.5s);
   transition: 0.1s;
 }
 

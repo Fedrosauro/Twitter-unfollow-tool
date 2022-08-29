@@ -6,20 +6,19 @@ style.type = "text/css";
 style.href = chrome.runtime.getURL("style.css");
 (document.head||document.documentElement).appendChild(style);
 
-let nameAccTab, element, objToAdd, id, targetNode, config1, observer1, startTab, firstRefresh, lastURL;
+let element, objToAdd, id, targetNode, config1, observer1, startTab, firstRefresh, lastURL;
 let myArray = new Array(32);
 
 startTab = true;
 
 chrome.runtime.onMessage.addListener(tabUpdated);
 
-function tabUpdated(msg, sender, response){
-  nameAccTab = msg.name; //get the name of the acc of the tab you"re in
+function tabUpdated(msg, sender, response){ //when tab is updated
   console.log("I've received a message!");
   id = setInterval(getThings, 100);
 }
 
-if(startTab && window.location.href.includes("following")){ //when the tab is first opened
+if(startTab && window.location.href.includes("following")){ //when the following tab is first opened
   console.log("Start tab happened");
   id = setInterval(getThings, 100);
   startTab = false;
@@ -30,7 +29,7 @@ function getThings(){
   targetNode = document.querySelector("div[aria-label='Timeline: Following']"); //targetNode to check for DOM changes
 
   console.log((element && targetNode) ? "I got the elements" : "Some elements are still unknown" );
-  if(element && targetNode){
+  if(element && targetNode && element.getAttribute("href").substring(1) === window.location.href.split("/")[3]){
     clearInterval(id);
     console.log("Element username = " + element.getAttribute("href").substring(1));
     console.log("Element targetNode = " + targetNode);

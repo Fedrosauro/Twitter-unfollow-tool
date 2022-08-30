@@ -7,7 +7,7 @@ style.type = "text/css";
 style.href = chrome.runtime.getURL("style.css");
 (document.head||document.documentElement).appendChild(style);
 
-let element, objToAdd, id, targetNode, config1, observer1, startTab, firstRefresh, lastURL;
+let element, objToAdd, id, targetNode, config1, observer1, startTab, firstRefresh, lastURL, children;
 let myArray = new Array(32);
 
 startTab = false; //used only if the first url is https...../*name*/following
@@ -74,7 +74,7 @@ function buttonsGeneration(){
   for(var i = 0; i < myArray.length; i++){
     myArray[i] = undefined;
   }
-  var children = targetNode.firstChild.children;
+  children = targetNode.firstChild.children;
   console.log(children);
   for(var i = 0; i < children.length; i++){
     myArray[i] = children[i].firstChild.firstChild.firstChild.children ? children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.firstChild.firstChild.children[1].firstChild.firstChild.href.substring(20) : undefined;
@@ -88,7 +88,7 @@ function buttonsGeneration(){
       objToAdd.classList.add("btn");
       objToAdd.setAttribute("name", myArray[i]);
       objToAdd.addEventListener("click", animateButton);
-      objToAdd.addEventListener("click", function(){ clickAction(children) });
+      objToAdd.addEventListener("click", clickAction);
       console.log("Element added");
     }
   }
@@ -120,8 +120,11 @@ function animateButton(e) {
   },500);
 }
 
-function clickAction(element){
-  //element.firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children[1].firstChild.click();
-  console.log(element);
-
+function clickAction(e){
+  console.log(e.target.name);
+  console.log(children);
+  for(var i = 0; i < children.length; i++){
+    if(e.target.name === children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.firstChild.firstChild.children[1].firstChild.firstChild.href.substring(20))
+      children[i].firstChild.firstChild.firstChild.firstChild.children[1].firstChild.children[1].firstChild.click();
+  }
 }

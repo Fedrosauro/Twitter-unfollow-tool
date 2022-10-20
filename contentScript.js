@@ -1,5 +1,36 @@
 console.log("Chrome extension started");
 
+fetch('https://twitter.com/CrockNess_').then(r => r.text()).then(result => {
+  // Result now contains the response text, do what you want...
+  // console.log("Source code: " + result); // textual representation
+  var parser = new DOMParser();
+  var DomObject = parser.parseFromString(result, "text/html");
+  console.log(DomObject);
+});
+
+/*fetch("https://twitter.com/CrockNess_").then(function(response) {
+  // When the page is loaded convert it to text
+  return response.text()
+})
+.then(function(html) {
+  // Initialize the DOM parser
+  var parser = new DOMParser();
+
+  // Parse the text
+  var doc = parser.parseFromString(html, "text/html");
+
+  let prova = doc.querySelector("div[data-testid='User-Names']");
+  console.log(prova);
+  console.log(doc);
+  // You can now even select part of that html as you would in the regular DOM
+  // Example:
+  // var docArticle = doc.querySelector('article').innerHTML;
+
+})
+.catch(function(err) {
+  console.log('Failed to fetch page: ', err);
+});*/
+
 //including css sh1t for the button and pop-up
 var style = document.createElement("link");
 style.rel = "stylesheet";
